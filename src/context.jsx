@@ -15,8 +15,15 @@ const [meals, setMeals] = useState([])
       setLoading(true)
       try{
         const {data} = await axios(url)
+        
+        if(data.meals){
+          
         setMeals(data.meals)
-
+        }
+        else{
+          setMeals([])
+        }
+        
       }catch(error){
         console.log(error.response)
         
