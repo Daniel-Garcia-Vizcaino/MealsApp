@@ -8,30 +8,33 @@ const randomMealUrl = 'https://www.themealdb.com/api/json/v1/1/random.php'
 
 
 const AppProvider = ({ children }) => {
-const [loading, setLoading] = useState(false)
-const [meals, setMeals] = useState([])
-const [searchTerm, setSearchTerm] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [meals, setMeals] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
+
+  const [showModal, setShowModal] = useState(false)
+
   
-    const fetchMeals = async (url) =>{
-      setLoading(true)
-      try{
-        const {data} = await axios(url)
+  const fetchMeals = async (url) =>{
+    setLoading(true)
+    try{
+      const {data} = await axios(url)
+      
+      if(data.meals){
         
-        if(data.meals){
-          
-        setMeals(data.meals)
-        }
-        else{
-          setMeals([])
-        }
-        
-      }catch(error){
-        console.log(error.response)
-        
+      setMeals(data.meals)
       }
-      setLoading(false)
+      else{
+        setMeals([])
+      }
+      
+    }catch(error){
+      console.log(error.response)
       
     }
+    setLoading(false)
+    
+  }
 
   const fetchRandomMeal = () => {
     fetchMeals(randomMealUrl)
@@ -49,7 +52,7 @@ const [searchTerm, setSearchTerm] = useState("")
     
   }, [searchTerm])
   
-  return <AppContext.Provider value={{ loading, meals, setSearchTerm, fetchRandomMeal }}>
+  return <AppContext.Provider value={{ loading, meals, setSearchTerm, fetchRandomMeal, showModal }}>
     {children}
   </AppContext.Provider>
 }
