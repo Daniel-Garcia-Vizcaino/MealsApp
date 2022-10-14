@@ -49,6 +49,11 @@ const selectMeal = (idMeal, favoriteMeal) => {
 
   
 
+  const closeModal = () => {
+    setShowModal(false)
+  }
+
+  
   useEffect(() => {
     fetchMeals(allMealsUrl)
   }, [])
@@ -60,7 +65,7 @@ const selectMeal = (idMeal, favoriteMeal) => {
     
   }, [searchTerm])
   
-  return <AppContext.Provider value={{ loading, meals, setSearchTerm, fetchRandomMeal, showModal, selectedMeal, selectMeal }}>
+  return <AppContext.Provider value={{ loading, meals, setSearchTerm, fetchRandomMeal, showModal, selectedMeal, selectMeal, closeModal }}>
     {children}
   </AppContext.Provider>
 }
