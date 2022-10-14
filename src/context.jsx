@@ -37,7 +37,13 @@ const [searchTerm, setSearchTerm] = useState("")
     fetchMeals(randomMealUrl)
   }
 
+
   useEffect(() => {
+    fetchMeals(allMealsUrl)
+  }, [])
+  
+  useEffect(() => {
+    if (!searchTerm) return
     fetchMeals(`${allMealsUrl}${searchTerm}`)
 
     
